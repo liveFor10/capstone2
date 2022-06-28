@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width" initial-scale=1>
+		<title>pmfinder - parks</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="/css/main.css" rel="stylesheet">
+	</head>
+	<body>
+		<!--columns container--><div class="sidebar-main-parent">
+			<!--column 1--><div id="sidebar" class="sidebar"></div><!--column 1-->
+			<!--column 2--><div class="main-window">
+				<div class="lfxMessages" id="msg ">
+					<% if ( locals.message ) { %>
+						<p class="lfxMessages"><%= locals.message %></p>
+					<% } else if (messages.error) { %>  
+						<p class="lfxMessages"><%= messages.error %></p>
+					<% } else if (messages.success) { %>
+						<p class="lfxMessages"><%= messages.success %></p>
+				 	<% } %>
+				</div>
+				
+				<!--search controls-->
+				<form class="row g-3" name="jobs" action="/parks/search"
+				  enctype="application/x-www-form-urlencoded"  method="GET">
+
+					<h1 class="h3 mb-3 fw-normal">Good luck in your search</h1>
+					
+					<div class="col-md-6 form-floating">
+						<select class="form-control" name="mountains" id="mtn" required>
+							<option selected value="hour">Hour</option>
+							<option value="year">Year</option>
+						</select>
+						<label for="mtn">mountains</label>
+					</div>
+
+					<div class="col-md-3">
+						<input  class="btn btn-outline-secondary btn-lg px-4" type="submit"
+							id="searchSubmit" value="Search">
+					</div>
+					<div class="col-md-9 form-floating"></div>
+				</form>
+				<br>
+				<!--display-->
+				<div class="album py-5 lfxWhiteDiv">
+					<div class="container">
+						<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+							<% if ( locals.jobs ) { %>
+								<% jobs.map((job, arrayIndex) => { %>
+									<div class="col">
+										<div class="card shadow-sm">
+											<div class="card-body">
+												<p class="card-text">
+													<h3><%=job.title %></h3>
+													<p><%=job.company %>
+														<%=job.city %>
+													</p>
+													<!--<a href="/jobs/<%=job._id%>" class="btn-oval">Learn More</a><br><br>-->
+												</p>
+
+												<div class="d-flex justify-content-between align-items-center">
+													<div class="btn-group">
+														<a href="/jobs/<%=job._id%>">
+															<button class="btn btn-sm btn-outline-secondary btn-lg px-4" type="button">
+																Details
+															</button>
+														</a>
+													</div>
+													<!--<small class="text-muted">9 mins</small>-->
+												</div>
+											</div>
+										</div>
+									</div>
+								<% }) %>
+							<% } %>
+						</div>
+					</div>
+				</div>
+			<!--column 2--></div>
+		<!--column container--></div>
+		
+		
+		<script src="/js/loadParks.js" type="text/javascript"></script>
+		<script src="/js/jquery.3.6.0.min.js" type="text/javascript"></script>
+		<script src="/js/loadSidebar.js" type="text/javascript"></script> 
+		<script src="/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+	</body>
+</html>
+
+
+		
+
