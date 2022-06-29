@@ -6,7 +6,7 @@ async function getConnectedMongoDB() {
 
   try {
     const pmfinderURL = consts.mongoURL;
-    const pmfinderDB = 'capstone2';
+    const pmfinderDB = consts.mongoDB;
     let mongoClient;
 
     mongoClient = await MongoClient.connect(pmfinderURL);
