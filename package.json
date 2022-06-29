@@ -21,7 +21,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "jquery": "^3.6.0",
-    "mongodb": "^4.6.0",
+    "mongodb": "^4.7.0",
     "nodemon": "^2.0.16"
   },
   "devDependencies": {
@@ -37,7 +37,7 @@
     "delay": "2500",
     "env": {
       "NODE_ENV": "development",
-      "PORT": "4009"
+      "PORT": "4011"
     }
   }
 }

@@ -13,37 +13,41 @@ parksRouter.route('/')
 parksRouter.route('/search')
   .get( (req, res) => {
     try {
-      park = {};
-      park.name = req.parkName;
-
       const maxItemsPerQuery = consts.MAX_ITEMS_PER_QUERY;
       const itemsPerPage = req.query.ipp || consts.ITEMS_PER_PAGE;
-      let queryLimit; 
       const requestedPageNumber = req.query.rpn || consts.REQUESTED_PAGE_NUMBER;
       const sortOrderAscending = req.query.so || consts.SORT_ORDER_ASC
-
-      queryLimit = maxItemsPerQuery < itemsPerPage ? itemsPerPage : maxItemsPerQuery; 
       
+      const queryLimit = maxItemsPerQuery < itemsPerPage ? itemsPerPage : maxItemsPerQuery; 
+      //const filter = mongoDButils.createParkFiltersFromQueryParams(req.query);
+      filter = {};
+      if (req.query.location) {
+        filter.State = req.query.location;
+      }
+      if (req.query.type) {
+        filter.LocationName = req.query.type;
+      }
+
       (async function searchParkByParkName() {
         try {
           const db = await mongoDButils.getConnectedMongoDB();
           const parks = await db.collection('parks')
-            .find( { "name" : parkName } )
-            .sort({ "name" : sortOrderAscending } )
+            .find( parkFilters )
+            .sort({ "LocationName" : sortOrderAscending } )
             .skip( itemsPerPage * requestedPageNumber )
             .limit( queryLimit )
             .toArray();
           if (parks) {
             res.render( 'parks', { parks: parks } );
           } else {
-            res.render( 'parks');
+            res.render( 'parks', { message: "No parks found." });
           }
         } catch (error) {
-          console.log(`parksRouter/search error=${JSON.stringify(error)}`)
+          console.log(`parksRouter/search async error=${JSON.stringify(error)}`)
         }
       }())
     } catch (error) {
-      console.log(`parksRouter/search error=${JSON.stringify(error)}`);
+      console.log(`parksRouter/search get error=${JSON.stringify(error)}`);
     }
   });
 
@@ -54,7 +58,7 @@ parksRouter.route('/:parkID')
     (async function findParkByParkID() {
       try {
         const db = await mongoDButils.getConnectedMongoDB();
-        const park = await db.collection('mountains')
+        const park = await db.collection('parks')
           .findOne( { "_id" : new ObjectID(parkID) } );
         res.render('park', { park : park } );
       } catch (error) {

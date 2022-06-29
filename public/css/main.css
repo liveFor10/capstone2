@@ -63,7 +63,7 @@ body {
   background-color: #ffffff;
 }
 
-/* job panels */
+/* detail panels */
 .album {
   background-color: #ffffff;
 }
@@ -117,12 +117,12 @@ a:active {
   color: black;
 }
 
-/* job-->apply */
+/* child/detail */
 table, th, td, tr {
   border:1px solid black;
   padding: 15px;
 }
-.lfxJobAppTable {
+.lfxDetailTable {
   border:1px solid black;
   width: 100%;
 }
@@ -136,28 +136,6 @@ table, th, td, tr {
   vertical-align: top;
   width: 50%;
 }
-.lfxJobAppTable-appColHidden {
+.lfxDetailTable-appColHidden {
   display: none;
-}
-
-/* applications */
-.tblAppJobIDcol {
-  border:1px solid black;
-  vertical-align: top;
-  width: 5%;
-}
-.tblAppDateCol {
-  border:1px solid black;
-  vertical-align: top;
-  width: 5%;
-}
-.tblAppJobTitleCol {
-  border:1px solid black;
-  vertical-align: top;
-  width: 65%;
-}
-.tblAppJobLocationCol {
-  border:1px solid black;
-  vertical-align: top;
-  width: 25%;
 }

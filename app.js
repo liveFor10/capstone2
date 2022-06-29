@@ -22,6 +22,10 @@ app.set('view engine', 'ejs');
 app.use('/parks', parksRouter);
 app.use('/mountains', mountainsRouter);
 
+app.use(express.static('public'));
+app.use(express.static('images'));
+app.use('/static', express.static('public'))
+
 app.get('/', (req, res) => {
   res.render('home', {
     someData: ['so', 'me', 'da', 'ta']

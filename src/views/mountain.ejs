@@ -16,28 +16,14 @@
 						<%= locals.message %>
 					<% } %>  
 				</div>
-				<table class="lfxJobAppTable">
+				<table class="lfxDetailTable">
 					<tr>
 						<td>
-							<b>Applicant Info:</b><br>
-							Name:  <%=jobApp.user.name %><br>
-							E-mail Address:  <%=jobApp.user.emailAddress %><br>
-							Phone Number:  <%=jobApp.user.phoneNumber %><br>
-							<br>
-							<b>Job Info:</b><br>
-							Company:  <%=jobApp.job.company %><br>
-							Title:  <%=jobApp.job.title %><br>
-							Location:  <%=jobApp.job.city %><br>
-							Submitted On Date:  <%=jobApp.job.submittedOnDate %><br>
-							Submitted By:  <%=jobApp.job.submittedByName %><br>
-							Submitted By E-mail:  <%=jobApp.job.submittedByEmail %><br>
-							Submitted By Phone:  <%=jobApp.job.submittedByPhone %><br>
-							<br>
-							<b>Application Info:</b><br>
-							Cover Letter:  <%=jobApp.coverLetter %><br>
-							Pasted Resume:  <%=jobApp.pastedResume %><br>
-							<input  class="btn btn-outline-secondary btn-lg px-4" id="dr"
-							  type="button" value="Download Resume">
+							Name:  <%=mountain.name %><br>
+							Elevation:  <%=mountain.elevation %><br>
+							Effort:  <%=mountain.effort %><br>
+							Description:  <%=mountain.desc %><br>
+							Coordinates:  <%=mountain.coords.lat %>, <%=mountain.coords.lng %><br>
 						</td>
 					</tr>
 				</table>
@@ -45,11 +31,6 @@
 		<!--column container--></div>
 		
 
-		<script>
-			const downloadButton = document.getElementById("dr");
-			downloadButton.addEventListener("click", downloadResume(jobApp.uploadedResume));
-		</script>
-		<script src="/js/validateFormData.js" type="text/javascript"></script>
 		<script src="/js/jquery.3.6.0.min.js" type="text/javascript"></script>
 		<script src="/js/loadSidebar.js" type="text/javascript"></script> 
 		<script src="/js/bootstrap.bundle.min.js" type="text/javascript"></script>

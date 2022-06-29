@@ -13,8 +13,10 @@ mountainsRouter.route('/')
 mountainsRouter.route('/search')
   .get( (req, res) => {
     try {
-      mountain = {};
-      mountain.name = req.mountainName;
+      filter = {};
+      if (req.query.mountain) {
+        filter.name = req.query.mountain;
+      }
 
       const maxItemsPerQuery = consts.MAX_ITEMS_PER_QUERY;
       const itemsPerPage = req.query.ipp || consts.ITEMS_PER_PAGE;
@@ -28,22 +30,22 @@ mountainsRouter.route('/search')
         try {
           const db = await mongoDButils.getConnectedMongoDB();
           const mountains = await db.collection('mountains')
-            .find( { "name": mountain.name } )
+            .find( filter )
             .sort({ "name" : sortOrderAscending } )
             .skip( itemsPerPage * requestedPageNumber )
             .limit( queryLimit )
             .toArray();
-          if (parks) {
+          if (mountains) {
             res.render( 'mountains', { mountains: mountains } );
           } else {
             res.render( 'mountains');
           }
         } catch (error) {
-          console.log(`mountainsRouter/search error=${JSON.stringify(error)}`)
+          console.log(`mountainsRouter/search async error=${JSON.stringify(error)}`)
         }
       }())
     } catch (error) {
-      console.log(`mountainsRouter/search error=${JSON.stringify(error)}`);
+      console.log(`mountainsRouter/search get error=${JSON.stringify(error)}`);
     }
   });
 
