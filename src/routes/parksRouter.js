@@ -32,7 +32,7 @@ parksRouter.route('/search')
         try {
           const db = await mongoDButils.getConnectedMongoDB();
           const parks = await db.collection('parks')
-            .find( parkFilters )
+            .find( filter )
             .sort({ "LocationName" : sortOrderAscending } )
             .skip( itemsPerPage * requestedPageNumber )
             .limit( queryLimit )

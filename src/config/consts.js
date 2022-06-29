@@ -1,7 +1,7 @@
 
 //db connectivity
-exports.mongoURL = 'mongodb://127.0.0.1:27017';
-/* exports.mongoURL = 'mongodb+srv://admin:adminASDpoi)(*123@mdbcluster00.ezr4k.mongodb.net?retryWrites=true&w=majority'; */
+/* exports.mongoURL = 'mongodb://127.0.0.1:27017'; */
+exports.mongoURL = 'mongodb+srv://admin:adminASDpoi)(*123@mdbcluster00.ezr4k.mongodb.net?retryWrites=true&w=majority';
 
 //query customization
 exports.MAX_ITEMS_PER_QUERY = 6;
