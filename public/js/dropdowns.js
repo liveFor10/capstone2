@@ -1,7 +1,6 @@
-
 function loadParkDropdowns() {
-    loadDropdown("data/parktypes.json", "typ");
-    loadDropdown("data/locations.json", "loc");
+    loadDropdown("/data/parktypes.json", "pt");
+    loadDropdown("/data/locations.json", "pl");
 }
 
 function loadMountainDropdown() {
@@ -15,18 +14,6 @@ async function loadData(dataFile) {
     return jsonArray;
 }
 
-function sortArray(a, b) {
-    aCompare = a.name || a;
-    bCompare = b.name || b;
-    if (aCompare > bCompare) {
-        return 1;
-    } else if (aCompare <bCompare) {
-        return -1;
-    } else {
-        return 0;
-    }
-}
-
 function loadDropdown(dataFile, elementID) {
 
     let items = [];
@@ -35,7 +22,7 @@ function loadDropdown(dataFile, elementID) {
     (async function loadJsonArrayFromFile() {
         items = await loadData(dataFile);
 
-        sItems = items.sort(sortArray);
+        sItems = items.sort(sortArrayAscending);
 
         let dropdown = document.getElementById(elementID);
 
@@ -48,3 +35,6 @@ function loadDropdown(dataFile, elementID) {
         }
     }())
 }
+  
+exports.loadParkDropdowns = loadParkDropdowns;
+exports.loadMountainDropdown = loadMountainDropdown;

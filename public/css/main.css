@@ -139,3 +139,8 @@ table, th, td, tr {
 .lfxDetailTable-appColHidden {
   display: none;
 }
+
+
+.notUnderlined {
+  text-decoration: none;
+}

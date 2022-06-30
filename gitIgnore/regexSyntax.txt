@@ -1,0 +1,5 @@
+db.users.findOne({"username" : {$regex : "son"}});
+db.collection.find({name:{'$regex' : '^string$', '$options' : 'i'}})
+
+db.users.findOne({ ${key} : {$regex : "son"}});
+db.collection.find({name:{'$regex' : '^string$', '$options' : 'i'}})

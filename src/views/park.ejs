@@ -19,19 +19,20 @@
 				<table class="lfxDetailTable">
 					<tr>
 						<td class="tblCol01">
-							<% if( park.LocationName ) { %>Name:  <%=park.LocationName %><br><% } %>
-							<% if( park.City ) { %>City:  <%=park.City %><br><% } %>
-							<% if( park.LocationID ) { %>ID:  <%=park.LocationID %><br><% } %>
+							<% if( park.LocationName ) { %><b>Name:</b>  <%=park.LocationName %><br><% } %>
+							<% if( park.City ) { %><b>City:</b>  <%=park.City %><br><% } %>
+							<% if( park.LocationID ) { %><b>ID:</b>  <%=park.LocationID %><br><% } %>
     						<% if( park.Address || park.City || park.State || park.ZipCode ) { %>
-								<% if( park.Address ) { %>Address: <%=park.Address %> / <% } %>
+								<% if( park.Address ) { %><b>Address:</b> <%=park.Address %> / <% } %>
 								<% if( park.City ) { %> <%=park.City %>, <% } %>
 								<% if( park.State ) { %> <%=park.State %>  <% } %>
 								<% if( park.ZipCode ) { %><%=park.ZipCode %><% } %>
 							<% } %><br>
-    						<% if( park.Phone ) { %>Phone:  <%=park.Phone %><br><% } %>
-    						<% if( park.Fax ) { %>Fax:  <%=park.Fax %><br><% } %>
-    						<% if( park.Latitude && park.Longitude ) { %>Lat/Long:  :  <%=park.Latitude %>, <%=park.Longitude %><br><% } %>
-    						<% if( park.Location ) { %>Location:  <%=park.Location.coordinates %>, Type<%=park.Location.type %><br><% } %>
+    						<% if( park.Phone ) { %><b>Phone:</b>  <%=park.Phone %><br><% } %>
+    						<% if( park.Fax ) { %><b>Fax:</b>  <%=park.Fax %><br><% } %>
+    						<% if( park.Latitude && park.Longitude ) { %><b>Lat/Long:</b>  :  <%=park.Latitude %>, <%=park.Longitude %><br><% } %>
+    						<% if( park.Location ) { %><b>Location:</b>  <%=park.Location.coordinates %>, Type<%=park.Location.type %><br><% } %>
+    						<% if( park.Visit ) { %><b>Visit:</b>  <a target="_blank" href='<%=park.Visit %>'><%=park.Visit %></a> %><br><% } %>
 						</td>
 					</tr>
 				</table>
@@ -39,7 +40,7 @@
 		<!--column container--></div>
 		
 		<script src="/js/jquery.3.6.0.min.js" type="text/javascript"></script>
-		<script src="/js/loadSidebar.js" type="text/javascript"></script> 
+		<script src="/js/load.sidebar.js" type="text/javascript"></script> 
 		<script src="/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 	</body>
 </html>

@@ -6,7 +6,7 @@ async function getConnectedMongoDB() {
 
   try {
     const pmfinderURL = consts.mongoURL;
-    const pmfinderDB = 'capstone2';
+    const pmfinderDB = consts.mongoDB;
     let mongoClient;
 
     mongoClient = await MongoClient.connect(pmfinderURL);
@@ -19,50 +19,40 @@ async function getConnectedMongoDB() {
   }
 }
 
-function createParkFiltersFromQueryParams(reqQueryParams) {
-
-  let andObj = {};     //all you need to AND multiple clauses
-  
-  // if ORs > 1
-  let orArray = [];    //inner set of OR criteria
-  let orObj = {};      //outer OR wrapper:  $or = '{ ' + JSON.stringify(orArray) + ' }'
-  
-  //no ANDs or ORs  
+function createMongoFiltersFromQueryParams(reqQueryParams) {
+  let andObj = {};
+  let orArray = [];
+  let orObj = {};
   let emptyObj = {};
 
   try {
-    if (reqQueryParams.location) {
-      andObj.title = `${reqQueryParams.location.toLowerCase()}`;
+    for (const key in reqQueryParams) {
+      const value = reqQueryParams[key];
+      if ( ( ! (consts.EXCLUDE_QUERY_PARAMS.includes(key))  &&  (value !== '') ) ) {
+        regOpt = {};
+        regOpt.$regex = value.toLowerCase();
+        regOpt.$options = 'i';
+        andObj[key] = regOpt;
+        let currKeyRegOpt = {}
+        currKeyRegOpt[key] = regOpt;
+        orArray.push( currKeyRegOpt );
+      }
     }
-    if (reqQueryParams.type) {
-      andObj.city = `${reqQueryParams.type.toLowerCase()}`;
-    }
-
-    if (reqQueryParams.searchCriterica === "all") {  // ANDing
+    if (reqQueryParams.searchCriteria === consts.SEARCH_CRITERIA_ALL) {
       return andObj;
-    } else if (reqQueryParams.searchCriterica === "any") {  // ORing
-
-      if (reqQueryParams.location) {
-        orArray.push( `{ location: ${reqQueryParams.location.toLowerCase()} }` );
-      }
-      if (reqQueryParams.type) {
-        orArray.push( `{ type: ${reqQueryParams.type.toLowerCase()} }` );
-      }
-      
+    } else if (reqQueryParams.searchCriteria === consts.SEARCH_CRITERIA_ANY) {
       if (orArray.length > 1) {
-        orObj.$or = '{ ' + JSON.stringify(orArray) + ' }';
+        orObj.$or = orArray;
         return orObj;
       } else if (orArray.length == 1) {
         return andObj;
       }
     }
-
     return emptyObj;
-
   } catch (error) {
     console.log('mongoDButils.createMongoFiltersFromQueryParams error=' + JSON.stringify(error));
   }
 }
 
-exports.createParkFiltersFromQueryParams = createParkFiltersFromQueryParams;
+exports.createMongoFiltersFromQueryParams = createMongoFiltersFromQueryParams;
 exports.getConnectedMongoDB = getConnectedMongoDB;

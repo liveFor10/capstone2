@@ -25,7 +25,7 @@
 				 	<% } %>
 				</div>
 				
-				<!--search controls-->
+				<!--search controls--><!--name="matchesJSONfiles"-->
 				<form class="row g-3" name="mountains" action="/mountains/search"
 				  enctype="application/x-www-form-urlencoded"  method="GET">
 
@@ -38,13 +38,65 @@
 						<label for="mtn">mountains</label>
 					</div>
 
+					<!--name="metaDoNotIncludeInFiltering"-->
+					<div class="col-md-5 form-floating">
+						<fieldset>
+							<div>
+								<input type="radio" id="or" name="searchCriteria" value="any" checked>
+								<label for="or">Use ANY search filter</label>
+							</div>
+							<div>
+								<input type="radio" id="and" name="searchCriteria" value="all">
+								<label for="and">Use ALL search filters</label>
+							</div>
+						</fieldset>
+					</div>
+					<div class="col-md-4 form-floating">
+						<select class="form-control" name="itemsPerPage" id="ipp">
+							<option value="2">2</option>
+							<option selected value="4">4</option>
+							<option value="8">8</option>
+							<option value="16">16</option>	
+						</select>
+						<label for="ipp">items per page</label>
+					</div>
+					<div class="col-md-3 form-floating">
+						<select class="form-control" name="maxResults" id="mr">
+							<option selected value=20>20</option>
+							<option value=40>40</option>
+							<option value=70>70</option>
+							<option value=150>150</option>	
+						</select>
+						<label for="mr">max results</label>
+					</div>
+					<div class="col-md-3 form-floating">
+						<select class="form-control" name="sortBy" id="sb">
+							<option selected value="name">name</option>
+							<option value="elevation">elevation</option>	
+							<option value="effort">effort</option>	
+						</select>
+						<label for="sb">results' order</label>
+					</div>
+					<div class="col-md-3 form-floating">
+						<fieldset>
+							<div>
+								<input type="radio" id="asc" name="resultsOrder" value=1 checked>
+								<label for="asc">Ascending</label>
+							</div>
+							<div>
+								<input type="radio" id="desc" name="resultsOrder" value=-1>
+								<label for="desc">Descending</label>
+							</div>
+						</fieldset>
+					</div>
+
 					<div class="col-md-3">
 						<input  class="btn btn-outline-secondary btn-lg px-4" type="submit"
 							id="searchSubmit" value="Search">
 					</div>
 					<div class="col-md-9 form-floating"></div>
 				</form>
-				<br>
+
 				<!--display-->
 				<div class="album py-5 lfxWhiteDiv">
 					<div class="container">
@@ -53,22 +105,14 @@
 								<% mountains.map((mountain, arrayIndex) => { %>
 									<div class="col">
 										<div class="card shadow-sm">
-											<div class="card-body">
-												<p class="card-text">
-													<img src="/images/mountains/<%=mountain.img %>" width="200">
-													<h4><%=mountain.name %></h4>
-													<p><%=mountain.elevation %> ft</p>
-												</p>
-
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="btn-group">
-														<a href="/mountains/<%=mountain._id%>">
-															<button class="btn btn-sm btn-outline-secondary btn-lg px-4" type="button">
-																Details
-															</button>
-														</a>
-													</div>
-												</div>
+											<div class="card-body btn-group">
+												<a class="notUnderlined" href="/mountains/<%=mountain._id%>">
+													<p class="card-text">
+														<img src="/images/mountains/<%=mountain.img %>" width="200">
+														<h4><%=mountain.name %></h4>
+														<%=mountain.elevation %> ft
+													</p>
+												</a>
 											</div>
 										</div>
 									</div>

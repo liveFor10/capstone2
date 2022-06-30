@@ -19,11 +19,12 @@
 				<table class="lfxDetailTable">
 					<tr>
 						<td>
-							Name:  <%=mountain.name %><br>
-							Elevation:  <%=mountain.elevation %><br>
-							Effort:  <%=mountain.effort %><br>
-							Description:  <%=mountain.desc %><br>
-							Coordinates:  <%=mountain.coords.lat %>, <%=mountain.coords.lng %><br>
+							<img src="/images/mountains/<%=mountain.img %>" width="500">
+							<b>Name:</b>  <%=mountain.name %><br>
+							<b>Elevation:</b>  <%=mountain.elevation %><br>
+							<b>Effort:</b>  <%=mountain.effort %><br>
+							<b>Description:</b>  <%=mountain.desc %><br>
+							<b>Coordinates:</b>  <%=mountain.coords.lat %>, <%=mountain.coords.lng %><br>
 						</td>
 					</tr>
 				</table>
@@ -32,7 +33,7 @@
 		
 
 		<script src="/js/jquery.3.6.0.min.js" type="text/javascript"></script>
-		<script src="/js/loadSidebar.js" type="text/javascript"></script> 
+		<script src="/js/load.sidebar.js" type="text/javascript"></script> 
 		<script src="/js/bootstrap.bundle.min.js" type="text/javascript"></script>
 	</body>
 </html>
