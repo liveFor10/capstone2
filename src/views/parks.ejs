@@ -72,6 +72,7 @@
 						</select>
 						<label for="mr">max results</label>
 					</div>
+
 					<div class="col-md-3 form-floating">
 						<select class="form-control" name="sortBy" id="sb">
 							<option selected value="LocationName">Name</option>
@@ -96,16 +97,20 @@
 						<input  class="btn btn-outline-secondary btn-lg px-4" type="submit"
 							id="sub" value="Search">
 					</div>
-					<div class="col-md-3 form-floating"></div>
+					<div class="col-md-2 form-floating" ></div>
+					<div class="col-md-2 form-floating" hidden>
+						<input class="form-control" name="requestedPageNumber" id="rpn" type="text" >
+					</div>
 				</form>
 				<br>
 				<!--display-->
 				<% if ( locals.paginationChunks ) { %>
 					<% for (var i =1; i <=locals.paginationChunks;  i++ ) { %>
-						<%=i %> 
+						<!--<input  class="btn btn-outline-secondary btn-sm" type="button" id="page<%=i %>" value="<%=i %>">-->
+						<!--<a class="lfxAnchor" data-value="<%=i %>" href=`javascript:resultsNavigate("<%=i-1 %>")`><%=i %></a>-->
+						<a class="lfxAnchor" data-value="<%=i %>" href=`resultsNavigate("<%=i-1 %>"); return false;`><%=i %></a>
 					<% } %>
 				<% } %>
-				<br>
 				<div class="album py-5 lfxWhiteDiv">
 					<div class="container">
 						<div class="row row-cols-1 row-cols-sm-2 g-2">
@@ -113,21 +118,13 @@
 								<% parks.map((park, arrayIndex) => { %>
 									<div class="col">
 										<div class="card shadow-sm">
-											<div class="card-body">
-												<p class="card-text">
-													<h4><%=park.LocationName %></h4>
-													<p><%=park.city %></p>
-												</p>
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="btn-group">
-														<a href="/parks/<%=park._id%>">
-															<button class="btn btn-sm btn-outline-secondary btn-lg px-4" type="button">
-																Details
-															</button>
-														</a>
-													</div>
-													<!--<small class="text-muted">9 mins</small>-->
-												</div>
+											<div class="card-body btn-group">
+												<a class="notUnderlined" href="/parks/<%=park._id%>">
+													<p class="card-text">
+														<h5><%=park.LocationName %></h5>
+														<%=park.City %>, <%=park.State %>
+													</p>
+												</a>
 											</div>
 										</div>
 									</div>
@@ -141,8 +138,8 @@
 			<!--column 2--></div>
 		<!--column container--></div>
 		
-
-		<script src="/js/dropdowns.js" type="text/javascript"></script>
+		<script src="/js/clicks.js" type="text/javascript"></script>
+		<script src="/js/data.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			(function() { loadParkDropdowns() })();
 		</script>

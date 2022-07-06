@@ -2,7 +2,7 @@ const express = require('express');
 const mongoDButils = require('../utils/mongoDButils.js');
 const { ObjectID } = require('mongodb');
 const consts = require('../config/consts.js');
-const dataUtil = require('../../public/js/dropdowns.js');
+const dataUtil = require('../../public/js/data.js');
 
 const parksRouter = express.Router();
 
@@ -34,7 +34,9 @@ parksRouter.route('/search')
             .toArray();
           if (parks.length > 0) {
             let sParks = [];
-            sParks = resultsOrder === consts.RESULTS_ORDER_ASC ? parks.sort(dataUtil.sortArrayAscending) : parks.sort(dataUtil.sortArrayDescending);
+            sParks = resultsOrder == consts.RESULTS_ORDER_ASC ?
+              dataUtil.sortJsonObjArrayAscending(parks, sortBy) :
+                dataUtil.sortJsonObjArrayDescending(parks, sortBy);
             renderObj.parks = parks;
             renderObj.paginationChunks = Math.ceil(maxResults / itemsPerPage);
           } else {

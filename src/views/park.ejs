@@ -31,7 +31,7 @@
     						<% if( park.Phone ) { %><b>Phone:</b>  <%=park.Phone %><br><% } %>
     						<% if( park.Fax ) { %><b>Fax:</b>  <%=park.Fax %><br><% } %>
     						<% if( park.Latitude && park.Longitude ) { %><b>Lat/Long:</b>  :  <%=park.Latitude %>, <%=park.Longitude %><br><% } %>
-    						<% if( park.Location ) { %><b>Location:</b>  <%=park.Location.coordinates %>, Type<%=park.Location.type %><br><% } %>
+    						<% if( park.Location ) { %><b>Location:</b>  <%=park.Location.coordinates %>, <b>Type:</b>  <%=park.Location.type %><br><% } %>
     						<% if( park.Visit ) { %><b>Visit:</b>  <a target="_blank" href='<%=park.Visit %>'><%=park.Visit %></a> %><br><% } %>
 						</td>
 					</tr>

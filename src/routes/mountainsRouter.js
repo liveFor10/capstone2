@@ -2,7 +2,8 @@ const express = require('express');
 const mongoDButils = require('../utils/mongoDButils.js');
 const { ObjectID } = require('mongodb');
 const consts = require('../config/consts.js');
-const dataUtil = require('../../public/js/dropdowns.js');
+const dataUtil = require('../../public/js/data.js');
+
 
 const mountainsRouter = express.Router();
 
@@ -34,8 +35,9 @@ mountainsRouter.route('/search')
           .toArray();
           if (mountains.length > 0) {
             let sMountains = [];
-            sMountains = mountains.sort(dataUtil.sortArrayAscending);
-            sMountains = resultsOrder == consts.RESULTS_ORDER_DESC ? sMountains.reverse() : sMountains;
+            sMountains = resultsOrder == consts.RESULTS_ORDER_ASC ?
+              dataUtil.sortJsonObjArrayAscending(mountains, sortBy) :
+                dataUtil.sortJsonObjArrayDescending(mountains, sortBy);
             renderObj.mountains = sMountains;
             renderObj.paginationChunks = Math.ceil(maxResults / itemsPerPage);
           } else {
